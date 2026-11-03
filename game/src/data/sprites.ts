@@ -60,6 +60,21 @@ export function spritePixels(def: SpriteDef): (string | null)[][] {
   return res;
 }
 
+/** 把像素顏色表畫到 canvas 的 (ox, oy) */
+export function paintPixels(ctx: CanvasRenderingContext2D, p: (string | null)[][], ox = 0, oy = 0) {
+  p.forEach((row, y) => row.forEach((c, x) => { if (c) { ctx.fillStyle = c; ctx.fillRect(ox + x, oy + y, 1, 1); } }));
+}
+
+/** 把一組 16×16 的圖排成一張橫向的動畫貼圖，每一格是一個 frame（編號 0, 1, 2…） */
+export function makeSheet(scene: Phaser.Scene, key: string, frames: SpriteDef[]): string {
+  if (scene.textures.exists(key)) return key;
+  const tex = scene.textures.createCanvas(key, frames.length * 16, 16);
+  if (!tex) throw new Error(`無法建立貼圖 ${key}`);
+  frames.forEach((f, i) => { paintPixels(tex.getContext(), spritePixels(f), i * 16, 0); tex.add(i, 0, i * 16, 0, 16, 16); });
+  tex.refresh();
+  return key;
+}
+
 /** 契靈貼圖的 key，例如 mon-1 */
 export const monKey = (id: number) => `mon-${id}`;
 
@@ -70,8 +85,7 @@ export function ensureMonTexture(scene: Phaser.Scene, id: number): string {
   const p = spritePixels(SPRITES[id]);
   const tex = scene.textures.createCanvas(key, p.length, p.length);
   if (!tex) throw new Error(`無法建立貼圖 ${key}`);
-  const ctx = tex.getContext();
-  p.forEach((row, y) => row.forEach((c, x) => { if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); } }));
+  paintPixels(tex.getContext(), p);
   tex.refresh();
   return key;
 }
