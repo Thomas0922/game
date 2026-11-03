@@ -1,0 +1,20 @@
+{
+  "name": "pactlings",
+  "version": "0.1.0",
+  "private": true,
+  "description": "契靈物語：像素風收集養成 RPG（區網雙人）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>契靈物語 企劃書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+TC:wght@400;500;700&family=Silkscreen&display=swap">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="#top">契靈物語</a>
+  <ul>
+    <li><a href="#concept">概念</a></li><li><a href="#world">地圖</a></li><li><a href="#dex">圖鑑</a></li><li><a href="#legends">傳說</a></li><li><a href="#starters">御三家</a></li>
+    <li><a href="#battle">對戰</a></li><li><a href="#capture">收服</a></li><li><a href="#growth">成長</a></li><li><a href="#gyms">道館</a></li>
+    <li><a href="#online">雙人連線</a></li><li><a href="#tech">技術</a></li><li><a href="#roadmap">開發順序</a></li><li><a href="#decide">待決定</a></li>
+  </ul>
+</div></header>
+
+<main class="wrap" id="top">
+<section class="hero">
+  <div>
+    <h1>契靈物語</h1>
+    <div class="en">PACTLINGS</div>
+    <p class="tag">像素風收集養成 RPG。兩個人在同一個區網、同一個世界裡冒險，也能互相挑戰。</p>
+    <dl class="spec">
+      <dt>類型</dt><dd>收集、養成、回合制對戰</dd>
+      <dt>畫風</dt><dd>16×16 像素地圖格，480×270 原生解析度整數放大；戰鬥圖 64×64</dd>
+      <dt>平台</dt><dd>瀏覽器（區網連線），之後可以包成 exe</dd>
+      <dt>人數</dt><dd>2 人同一個世界，架構可以擴充到更多人</dd>
+      <dt>規模</dt><dd>200 種契靈（含 7 隻傳說、3 隻幻之）· 12 種屬性 · 8 座道館 + 聯盟</dd>
+      <dt>主線長度</dt><dd>目標 15–20 小時</dd>
+    </dl>
+  </div>
+  <div class="dlg prof">
+    <div class="who">白樺博士</div>
+    <p class="say">歡迎來到晨曦地方！這三隻契靈都在等夥伴。選一隻吧，冒險就從今天開始。</p>
+    <div class="picks" id="picks"></div>
+    <div class="more"><span>點一隻看圖鑑資料</span><span class="blink" aria-hidden="true">▼</span></div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="sec-head">
+    <h2>你的構想，補齊之後</h2>
+    <p class="lead">左邊是你給的方向，右邊是我補上的具體設計。你交給我決定的兩件事（畫風、對戰方式）也在裡面。</p>
+  </div>
+  <div class="ideas">
+    <div class="idea head"><span>你的構想</span><span>完善後的設計</span></div>
+    <div class="idea"><span class="you">像素 2D 畫風</span><span>16×16 地圖格、480×270 解析度整數放大。每種屬性一個主色，同一條進化線共用配色，一眼看得出是誰進化來的。</span></div>
+    <div class="idea"><span class="you">一張初始大地圖</span><span>「晨曦地方」：10 個城鎮、8 條道路加勝利之路，地形跟著道館屬性分區（麥田、森林、雪原、霧山、火山、高原、海港、湖心首都）。</span></div>
+    <div class="idea"><span class="you">200 種，會進化；傳說要霸氣</span><span>14 條三段進化線、60 條兩段、28 隻不進化，再加 7 隻傳說、3 隻幻之。進化方式有 5 種，其中「連線交換」只有兩個人才做得到。傳說用 24×24 的大圖，每隻都有固定的出現地點和條件，戰鬥是兩條血的首領戰。</span></div>
+    <div class="idea"><span class="you">開局三選一</span><span>草、火、水三角相剋。NPC 勁敵會選剋你的那一隻；另外兩隻要跟另一位玩家交換才拿得到。</span></div>
+    <div class="idea"><span class="you">練等、學新技能</span><span>等級上限 60，每種契靈升級可以學 8–12 招，最多帶 4 招。</span></div>
+    <div class="idea"><span class="you">打道館拿徽章</span><span>8 座道館加天頂聯盟。每枚徽章解鎖一個地圖能力（砍樹、碎冰、衝浪…），剛好打開下一條路，控制探索順序。</span></div>
+    <div class="idea"><span class="you">同一個內網兩人玩、能存檔</span><span>一台電腦開伺服器，兩個人都用瀏覽器連進去。存檔放在伺服器，自動存。</span></div>
+    <div class="idea"><span class="you">同時上線會遇到、能挑戰</span><span>同一張地圖看得到對方，走到對方面前就能看名片、友誼賽、契約賽、交換。</span></div>
+    <div class="idea"><span class="you">收服對方的契靈</span><span>只在雙方都同意的「契約賽」。對方 HP 剩 25% 以下才能丟契約球，而且收服的人要贏下整場才算數；御三家和自己鎖定的 3 隻不會被收走。</span></div>
+    <div class="idea"><span class="you">打到血少丟球，不同球不同成功率</span><span>13 種球，倍率從 ×1 到必中。公式公開，下面有試算器。</span></div>
+    <div class="idea"><span class="you">對戰方式（交給我選）</span><span>同時選指令的回合制，加上「能量」系統取代招式次數。理由寫在對戰章節。</span></div>
+  </div>
+
+  <h3 class="sub">核心循環</h3>
+  <div class="loop">
+    <span class="step">走進草叢</span><span class="arr">→</span><span class="step">遇到野生契靈</span><span class="arr">→</span><span class="step">對戰</span><span class="arr">→</span><span class="step">收服或拿經驗</span><span class="arr">→</span><span class="step">升級・學招・進化</span><span class="arr">→</span><span class="step">挑戰道館</span><span class="arr">→</span><span class="step">徽章打開下一條路</span><span class="arr">↺</span>
+  </div>
+
+  <h3 class="sub">故事</h3>
+  <p class="panel" style="max-width:70ch">晨曦地方的人和契靈靠「契約」結伴。最近北方山脈飄出一種叫「蝕霧」的霧氣，被霧籠罩的契靈會失控；主張解除所有契約、讓契靈回歸野性的「無契團」在背後推波助瀾。主角從白樺博士手上接過第一隻契靈，一邊挑戰八座道館，一邊追查蝕霧的源頭，最後在天頂山的契約之間見到訂下第一份契約的傳說契靈穹輝。打敗冠軍之後，北方的蝕霧之源打開，蝕霧真正的源頭蝕淵在那裡等著。</p>
+</section>
+
+<section id="world">
+  <div class="sec-head">
+    <h2>晨曦地方</h2>
+    <p class="lead">這張是地區總覽圖，也就是遊戲裡打開地圖時看到的那張，不是實際走的大小；實際尺寸在下面。從西南角的萌芽村出發，順時針繞一圈收集 7 枚徽章，最後衝浪到湖心的鋼鐵都，再走勝利之路上天頂聯盟。點地名、路線或 ★ 看會遇到哪些契靈。</p>
+  </div>
+  <div class="map-grid">
+    <div>
+      <div class="mapbox"><canvas id="map" class="spr" aria-label="晨曦地方的像素地圖"></canvas><div id="pins"></div></div>
+      <div class="map-legend">
+        <span><i style="background:#4aa347"></i>草叢（會遇敵）</span><span><i style="background:#dcc08f"></i>道路</span>
+        <span><i style="background:#3d78cf"></i>水面，白點是衝浪水路</span><span><i style="background:#e3c04b"></i>麥田</span><span><i style="background:#e0532d"></i>熔岩</span>
+      </div>
+    </div>
+    <div class="panel loc" id="loc" aria-live="polite"></div>
+  </div>
+
+  <h3 class="sub">實際尺寸</h3>
+  <p style="max-width:70ch">總覽圖上 9 條路加起來只有約 200 格，照角色每秒走 4 格算，不到 1 分鐘就走完。所以總覽圖上的每個地點，在遊戲裡都是一張獨立的地圖，走到邊緣就切換到下一張。下面是 1 號道路的實際大小：96×30 格，白色虛線框是一個畫面（30×17 格）能看到的範圍。</p>
+  <div class="route-box"><canvas id="route1" class="spr" aria-label="1 號道路實際尺寸示意圖"></canvas></div>
+  <div class="map-legend">
+    <span>左：萌芽村入口 → 右：麥穗鎮入口</span><span><i style="background:#4aa347"></i>草叢 4 片</span><span><i style="background:#3d6fd1"></i>訓練家 4 位</span>
+    <span><i style="background:#c2255c"></i>道具 4 個</span><span><i style="background:#9a6236"></i>單向小崖（往右的捷徑）</span><span>右下支線：往雙子祭壇</span><span>中下紅屋頂：休息小屋</span>
+  </div>
+  <p class="muted" style="margin-top:10px;max-width:70ch">這條路的主路約 125 格，只走路約 30 秒，跑步約 15 秒。加上草叢遇敵、打訓練家、撿道具，第一次走完大約 10 分鐘。</p>
+
+  <div class="tbl-wrap" style="margin-top:20px"><table class="tbl">
+    <thead><tr><th>區域</th><th>數量</th><th>實際大小（格）</th><th>裡面有什麼</th><th>第一次花的時間</th></tr></thead>
+    <tbody>
+      <tr><td>城鎮</td><td class="num">10</td><td class="num">約 40×32</td><td>8–12 間能進去的房子、商店、驛站、道館</td><td class="num">每個 5–10 分鐘</td></tr>
+      <tr><td>道路</td><td class="num">9</td><td class="num">寬 30、長 90–150</td><td>4–6 位訓練家、3–5 片草叢、2–4 個道具，加一條要之後的徽章才能走的支線</td><td class="num">每條 10–15 分鐘</td></tr>
+      <tr><td>洞窟・迷宮</td><td class="num">4</td><td class="num">2–4 層，每層約 40×40</td><td>古森深處、霧隱山暗洞、火山口、勝利之路洞窟；有推石頭、照明、碎冰之類的機關，和地面上抓不到的契靈</td><td class="num">每個 20–30 分鐘</td></tr>
+      <tr><td>中央湖</td><td class="num">1</td><td class="num">約 60×50</td><td>衝浪水路、小島、湖底入口</td><td class="num">10–15 分鐘</td></tr>
+      <tr><td>建築內部</td><td class="num">約 60</td><td class="num">10×8 起</td><td>道館關卡、研究所、民宅、聯盟殿堂</td><td class="num">—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted" style="margin-top:10px;max-width:70ch">光是第一次探索就約 5 小時，再加上道館戰、練等、劇情和收集，主線落在原本設定的 15–20 小時。如果還想更大，最省工的做法是加支線區域（例如衝浪才到得了的小島），而不是把每條路拉長。</p>
+</section>
+
+<section id="dex">
+  <div class="sec-head">
+    <h2>契靈圖鑑 200</h2>
+    <p class="lead">點任何一隻看進化線、取得方式和屬性弱點。一般契靈是 16×16 的像素小圖，同一條進化線保留同樣的招牌特徵；#191–#200 的傳說和幻之契靈是 24×24 的大圖。戰鬥用的 64×64 大圖之後再畫。</p>
+  </div>
+  <div class="dex-tools" id="dexFilters"></div>
+  <div class="dex-bar"><span id="dexCount"></span><input type="search" id="dexQ" placeholder="搜尋名字或編號" aria-label="搜尋契靈"></div>
+  <div class="dex-grid" id="dexGrid"></div>
+</section>
+
+<section id="legends">
+  <div class="sec-head">
+    <h2>傳說與幻之契靈</h2>
+    <p class="lead">7 隻傳說、3 隻幻之。每隻只在固定的地點、滿足條件時才出現，一個存檔每種只有一隻。</p>
+  </div>
+  <div class="two" style="margin-bottom:24px">
+    <div>
+      <div class="label">傳說戰是首領戰</div>
+      <ul>
+        <li>有 <b>2 條血</b>。第 1 條血時身上有「靈壓護盾」，任何球都會被彈開，<b>星辰球也一樣</b>。</li>
+        <li>打掉第 1 條血後進入第 2 形態，招式變強，這時才能丟球。</li>
+        <li>出場特性「威壓」：我方全隊攻擊 −1。基礎捕獲率只有 3%。</li>
+        <li>不小心打倒了也不會永遠錯過，下一次條件成立時會回到原地。</li>
+      </ul>
+    </div>
+    <div>
+      <div class="label">幻之契靈只有兩個人才遇得到</div>
+      <ul>
+        <li>曉與宵：兩位玩家同時上線、各自站上雙子祭壇的一側。站東側遇到曉，站西側遇到宵，想要另一隻就互相交換。</li>
+        <li>契源：兩人都打敗冠軍、各自擁有曉或宵，而且交換過契靈之後，祭壇中央才會出現。</li>
+        <li>幻之契靈不用丟球，打贏就會跟隨。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="lg-grid" id="legendGrid"></div>
+
+  <h3 class="sub">星辰球：一定成功的球</h3>
+  <p style="max-width:70ch">商店不賣。地圖上藏著 7 片星辰碎片，集滿後交給白樺博士，就能合成 1 顆星辰球。圖鑑登錄 180 種，博士會再送 1 顆，所以一個存檔最多只有 2 顆。傳說有 7 隻，該把它用在哪一隻身上，要自己決定。</p>
+  <div class="tbl-wrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>#</th><th>地點</th><th>怎麼拿</th><th>最早什麼時候</th></tr></thead><tbody id="shards"></tbody></table></div>
+</section>
+
+<section id="starters">
+  <div class="sec-head">
+    <h2>御三家</h2>
+    <p class="lead">草剋水、水剋火、火剋草。三隻定位不同，選哪一隻都能通關，但打法差很多。</p>
+  </div>
+  <div class="st-grid" id="starterGrid"></div>
+</section>
+
+<section id="battle">
+  <div class="sec-head">
+    <h2>對戰：同時選指令的回合制 + 能量</h2>
+    <p class="lead">這是你交給我選的部分。下面是一個回合的畫面示意：你的炎鑽鼴王對上蟲草雙屬性的古木竹節，火招打過去是 ×4。</p>
+  </div>
+  <div class="two">
+    <div class="dlg bt" role="img" aria-label="對戰畫面示意">
+      <div class="bt-field">
+        <div class="pad foe"></div><div class="pad me"></div>
+        <div id="btFoe"></div><div id="btMe"></div>
+        <div class="plate foe"><div class="row"><b>古木竹節</b><span>Lv35</span></div><div class="row"><span id="btFoeT"></span></div><div class="hp"><i style="width:38%;background:#f59f00"></i></div></div>
+        <div class="plate me"><div class="row"><b>炎鑽鼴王</b><span>Lv36</span></div><div class="row"><span id="btMeT"></span><span class="tnum">118/164</span></div><div class="hp"><i style="width:72%;background:#3fbf5a"></i></div>
+          <div class="en">能量 <b></b><b></b><b></b><b class="off"></b><b class="off"></b> 3/5</div></div>
+      </div>
+      <div class="bt-msg"><span>要讓炎鑽鼴王做什麼？</span><span class="timer">回合 4 · 剩 21 秒 · 對手已選好</span></div>
+      <div class="bt-cmd">
+        <div class="mv best"><b>烈焰爪</b><span class="cost">2 EN</span><span><span class="chip" style="background:#f0703c;color:#1a1f36">火</span> 威力 75</span><span class="eff4">×4</span></div>
+        <div class="mv"><b>岩崩</b><span class="cost">2 EN</span><span><span class="chip" style="background:#a8845a;color:#1a1f36">岩</span> 威力 75</span><span class="eff05">×½</span></div>
+        <div class="mv"><b>熱身</b><span class="cost">1 EN</span><span>攻擊 +2</span><span></span></div>
+        <div class="mv off"><b>熔岩爆裂</b><span class="cost">4 EN</span><span><span class="chip" style="background:#f0703c;color:#1a1f36">火</span> 威力 120</span><span>能量不足</span></div>
+      </div>
+      <div class="bt-sub"><span>換人</span><span>道具</span><span>丟球</span><span>逃走</span></div>
+    </div>
+    <div style="display:grid;gap:18px">
+      <ul>
+        <li>1 對 1，隊伍最多 6 隻，每隻最多 4 招。</li>
+        <li>每回合雙方<b>同時</b>選指令（招式、換人、道具、丟球），兩邊都選好後依速度決定誰先動。連線對戰每回合限時 30 秒，時間到自動用 0 能量的招式。</li>
+        <li><b>能量</b>：出場時 2 點，每回合結束 +1，上限 5。招式消耗 0–4 點；0 能量的招式永遠能用，不會有沒招可放的狀況。換下場的契靈保留能量。</li>
+        <li>屬性相剋 ×2 / ×½ / ×0，雙屬性相乘，最高 ×4。用自己屬性的招式 ×1.5，爆擊 ×1.5（機率 1/16）。</li>
+        <li>能力只有 HP、攻擊、防禦、速度 4 項，另外有 0–15 的天賦值和每種契靈 1 個特性。</li>
+      </ul>
+      <div class="formula">傷害 = ((等級 × 0.4 + 2) × 威力 × 攻擊 ÷ 防禦 ÷ 50 + 2) × 本系 × 相剋 × 爆擊 × 亂數(0.85–1.0)</div>
+      <div>
+        <div class="label">為什麼選這個</div>
+        <ul class="why">
+          <li>回合制在區網上最穩。伺服器收齊兩邊的指令再結算，不用即時同步，斷線重連也能接著打。</li>
+          <li>同時選指令讓 PvP 公平，沒有人能先看對手出什麼再決定。</li>
+          <li>能量讓每回合都有取捨：現在放大招，還是先存能量。這也是跟同類遊戲手感最不一樣的地方。</li>
+          <li>沒選即時動作制：兩台電腦之間的延遲和命中判定會吃掉大量開發時間，數值也很難平衡。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">12 屬性相剋表</h3>
+  <div class="tbl-wrap"><table class="tc" id="typeChart"></table></div>
+  <div class="legend"><span>左邊是攻擊方，上面是被打的一方</span><span style="color:var(--good)">2 = 效果絕佳</span><span style="color:var(--bad)">½ = 效果不好</span><span>0 = 沒有效果</span></div>
+
+  <h3 class="sub">代表招式</h3>
+  <p class="muted" style="margin-bottom:12px;max-width:68ch">每種屬性約 10–12 招，全遊戲約 150 招。這裡列出每屬性 0、2、4 能量各一招；1 和 3 能量多半是輔助招，例如熱身、煙幕、治癒花粉。</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>屬性</th><th>0 能量</th><th>2 能量</th><th>4 能量</th></tr></thead><tbody id="moves"></tbody></table></div>
+
+  <h3 class="sub">異常狀態</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>狀態</th><th>效果</th><th>免疫</th></tr></thead>
+    <tbody>
+      <tr><td>灼燒</td><td>每回合扣 1/16 HP，攻擊 −25%</td><td>火屬性</td></tr>
+      <tr><td>麻痺</td><td>速度減半，25% 機率無法行動</td><td>雷屬性</td></tr>
+      <tr><td>中毒</td><td>每回合扣 1/8 HP</td><td>金屬性</td></tr>
+      <tr><td>凍結</td><td>無法行動，每回合 25% 機率解除；被火招打中立刻解凍</td><td>冰屬性</td></tr>
+      <tr><td>睡眠</td><td>1–3 回合無法行動</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="capture">
+  <div class="sec-head">
+    <h2>收服</h2>
+    <p class="lead">野生契靈隨時可以丟球，會用掉這一回合。血越少、有異常狀態，越容易成功。球丟出去會搖 3 下，搖越多下代表越接近成功。</p>
+  </div>
+  <div class="formula" style="margin-bottom:18px">成功率 = 基礎捕獲率 × 球的倍率 × 狀態倍率 × (1 − 0.7 × 剩餘 HP 比例)，上限 95%</div>
+  <div class="dlg calc">
+    <div class="fields">
+      <div class="field"><label for="cRar">物種稀有度（基礎捕獲率）</label><select id="cRar"></select></div>
+      <div class="field"><label for="cBall">用哪種球</label><select id="cBall"></select></div>
+      <div class="field"><label for="cSt">異常狀態</label><select id="cSt"></select></div>
+      <div class="field"><label for="cHp">對方剩餘 HP：<b id="cHpOut">25%</b></label><input type="range" id="cHp" min="1" max="100" value="25"></div>
+    </div>
+    <div class="res" aria-live="polite"><div class="label">這一球成功的機率</div><div class="big tnum" id="cBig">—</div><div class="meter"><i id="cMeter"></i></div><div class="muted" id="cAvg"></div></div>
+  </div>
+  <h3 class="sub">13 種球</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>球</th><th>倍率</th><th>價格</th><th>說明</th></tr></thead><tbody id="balls"></tbody></table></div>
+</section>
+
+<section id="growth">
+  <div class="sec-head">
+    <h2>成長與進化</h2>
+    <p class="lead">5 種進化方式。進化畫面可以按取消，延後到想進化的時候。</p>
+  </div>
+  <div class="evo-grid" id="evos"></div>
+  <h3 class="sub">規則</h3>
+  <ul style="max-width:70ch">
+    <li>等級上限 60。道館從 Lv10 開始，每座大約高 5 級，冠軍 Lv54–58。</li>
+    <li>經驗曲線分快、中、慢三種；進化型和傳說用慢速。</li>
+    <li>升級時學新招，每種契靈 8–12 招。最多帶 4 招，學第 5 招要先忘掉一招；忘掉的招可以到「回憶屋」想回來。</li>
+    <li>道館獎勵招式卡，可以教給屬性相符的契靈。</li>
+    <li>隊伍最多 6 隻，其他的放在驛站的存放箱。</li>
+    <li>天賦值 0–15 是同種契靈個體之間的差異，抓到第二隻同種的也有意義。</li>
+    <li>親密度：一起戰鬥、帶在身邊走路、餵點心會增加；戰鬥倒下會減少。</li>
+  </ul>
+</section>
+
+<section id="gyms">
+  <div class="sec-head">
+    <h2>8 座道館與天頂聯盟</h2>
+    <p class="lead">每枚徽章解鎖的地圖能力，剛好就是下一條道路需要的。點隊伍裡的契靈可以看資料。</p>
+  </div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>#</th><th>城鎮</th><th>屬性</th><th>館主</th><th>隊伍</th><th>徽章</th></tr></thead><tbody id="gymRows"></tbody></table></div>
+</section>
+
+<section id="online">
+  <div class="sec-head">
+    <h2>雙人連線</h2>
+    <p class="lead">兩個人在同一個世界各玩各的進度。待在同一張地圖時看得到對方的角色和名字，位置每秒同步 10 次。你可以先打到第 3 道館，對方才剛到第 1 道館；寶箱和道館進度每人各自一份。</p>
+  </div>
+  <div class="label">走到對方面前按確認鍵</div>
+  <div class="mp-grid">
+    <div class="mp"><h4>名片</h4><p>看對方的徽章數、圖鑑登錄數和隊伍等級。</p></div>
+    <div class="mp"><h4>友誼賽</h4><p>什麼都不賭。可以選原本的等級，或全隊統一 Lv50。會拿到少量經驗。</p></div>
+    <div class="mp hot"><h4>契約賽</h4><p>可以收服對方契靈的對戰，規則在下面。</p></div>
+    <div class="mp"><h4>交換</h4><p>各選一隻，兩邊都按確認才成交。有些契靈會在交換時進化。</p></div>
+  </div>
+
+  <h3 class="sub">契約賽：收服對方的契靈</h3>
+  <div class="two">
+    <ol class="steps">
+      <li><span>發起時兩邊都看得到彼此的隊伍數量和平均等級，雙方都按「接受」才開打。</span></li>
+      <li><span>每人可以設最多 3 隻「羈絆鎖定」，御三家永遠鎖定。鎖定的契靈不會被收服。</span></li>
+      <li><span>對方契靈的 HP 降到 25% 以下，才能丟「契約球」，會用掉這一回合。</span></li>
+      <li><span>成功率 = 60% × (1 − 3 × 剩餘 HP 比例)，有異常狀態再 +10%，上限 70%。</span></li>
+      <li><span>收服成功的契靈進入「封印」並離場。戰鬥結束時，收服方贏了，契靈轉到收服方名下；收服方輸了，封印解除，契靈回到原主人身邊。</span></li>
+      <li><span>每場最多收服 1 隻。契靈資料會留下「原訓練家」的名字。</span></li>
+      <li><span>對戰中斷線超過 60 秒算斷線的人輸，封印照常結算，拔網路線逃不掉。</span></li>
+    </ol>
+    <div style="display:grid;gap:18px">
+      <div class="panel why">
+        <div class="label">為什麼加這些限制</div>
+        <p>你原本的構想是打到血很少就能收服對方的契靈。這很刺激，但只有兩個人玩的時候，一方失去最喜歡的契靈，很容易就不想玩了。所以收服保留，另外加三道保險：雙方都要同意、最重要的契靈可以鎖住、收服的人必須贏下整場。</p>
+      </div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>對方剩餘 HP</th><th>契約球成功率</th></tr></thead>
+        <tbody><tr><td class="num">25%</td><td class="num">15%</td></tr><tr><td class="num">15%</td><td class="num">33%</td></tr><tr><td class="num">5%</td><td class="num">51%</td></tr><tr><td class="num">剩 1 點</td><td class="num">約 60%</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="two" style="margin-top:40px">
+    <div>
+      <h3 class="sub" style="margin-top:0">只有兩個人才有的內容</h3>
+      <ul>
+        <li><b>交換進化</b>：千鶴靈、雷鐘塔只能靠交換得到。</li>
+        <li><b>另外兩隻御三家</b>：開局只能選一隻，另外兩隻靠跟對方交換。</li>
+        <li><b>雙子祭壇</b>：兩個人同時站上祭壇的兩側，幻之契靈曉與宵才會出現，一人一隻。</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sub" style="margin-top:0">存檔與斷線</h3>
+      <ul>
+        <li>存檔放在主機電腦的 SQLite 檔案。進城、戰鬥結束、每 60 秒自動存一次，也可以手動存。</li>
+        <li>每個玩家用「名字 + 4 位數 PIN」登入，換一台電腦也能接著玩。</li>
+        <li>伺服器每天自動備份一份，存檔壞了可以退回前一天。</li>
+        <li>主機電腦要開著伺服器，另一個人才能玩（見「待決定」第 6 點）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="sec-head">
+    <h2>技術架構</h2>
+    <p class="lead">推薦用瀏覽器版：一台電腦開伺服器，兩個人都用瀏覽器連進去，第二台電腦什麼都不用裝。</p>
+  </div>
+  <div class="arch">
+    <div class="node">
+      <h4>電腦 A（主機）</h4>
+      <div class="srv"><b>遊戲伺服器（Node.js + Colyseus）</b>
+        <ul><li>世界房間：同步每個人的位置</li><li>對戰房間：收指令、算傷害和亂數、判定收服</li><li>存檔：saves.db（SQLite）</li></ul></div>
+      <div class="cli">玩家 A 的瀏覽器</div>
+    </div>
+    <div class="link"><span class="wire"></span><span>WebSocket<br>區網</span><span class="wire"></span></div>
+    <div class="node"><h4>電腦 B</h4><div class="cli">玩家 B 的瀏覽器<br>打開 <code>http://192.168.x.x:3000</code></div></div>
+  </div>
+  <p class="panel" style="margin-top:18px;max-width:78ch"><b>伺服器說了算。</b>瀏覽器只送「我按了什麼」，對戰亂數、傷害、收服判定和契靈轉移全部在伺服器算，並用一筆資料庫交易完成。這樣不會出現複製契靈，也沒辦法改自己的存檔作弊。</p>
+
+  <h3 class="sub">工具</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>部分</th><th>推薦</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td>遊戲畫面</td><td>TypeScript + Phaser 3</td><td>成熟的 2D 遊戲引擎，內建 tile 地圖、動畫、鍵盤和手把輸入</td></tr>
+      <tr><td>地圖編輯</td><td>Tiled</td><td>免費的 tile 地圖編輯器，輸出 JSON 給 Phaser 直接讀</td></tr>
+      <tr><td>像素美術</td><td>Aseprite</td><td>畫像素圖和動畫的常用工具（付費）；免費的替代品是 LibreSprite</td></tr>
+      <tr><td>多人伺服器</td><td>Node.js + Colyseus</td><td>專門做房間制多人遊戲，狀態會自動同步給每個玩家</td></tr>
+      <tr><td>存檔</td><td>SQLite</td><td>一個檔案就是整個資料庫，備份就是複製檔案</td></tr>
+      <tr><td>之後打包</td><td>Electron</td><td>包成 exe，雙擊就能開主機</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted" style="margin-top:12px;max-width:78ch">另一個選擇是 Godot 4：內建 tile 地圖和多人功能，包成 exe 的手感更好。缺點是第二個人也要裝程式，伺服器端的判定要另外寫。我推薦瀏覽器版，主要是兩人區網連線最省事，我也能直接幫你寫和除錯。</p>
+
+  <h3 class="sub">資料長這樣</h3>
+  <div class="two">
+<pre><code>Player {
+  id, name, pinHash,
+  map, x, y, money,
+  badges: number[],        // 1–8
+  bag: { [itemId]: count }
+}
+Monster {
+  uid, speciesId,          // 1–200
+  ownerId, originalOwnerId,
+  nickname, level, exp,
+  talent: { hp, atk, def, spd },  // 0–15
+  moves: [moveId × 4],
+  hp, status, energy,
+  friendship, locked,      // 羈絆鎖定
+  box                      // null = 在隊伍裡
+}</code></pre>
+<pre><code>// 瀏覽器 → 伺服器
+move       { dir: "up" }
+interact   { target: "p2" }
+challenge  { target: "p2", mode: "friendly" | "pact" }
+command    { kind: "skill", slot: 2 }
+command    { kind: "ball", item: "pactBall" }
+trade      { offer: uid }
+
+// 伺服器 → 瀏覽器
+players    [{ id, name, map, x, y }]
+turnResult { events: [...], hp, energy }
+battleEnd  { winner, sealed: uid | null }</code></pre>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="sec-head">
+    <h2>開發順序</h2>
+    <p class="lead">每一步都做出能玩、能驗收的東西再往下。先把單機的核心手感做對，再加連線。</p>
+  </div>
+  <ol class="road">
+    <li><span class="m">M1</span><div><h4>單機核心</h4><p>萌芽村、1 號道路、麥穗鎮。走路與碰撞、草叢遇敵、能量對戰、收服、10 隻契靈、本機存檔。</p></div><p class="ok"><b>驗收：</b>從選御三家一路玩到打贏第 1 道館。</p></li>
+    <li><span class="m">M2</span><div><h4>區網連線</h4><p>伺服器、名字 + PIN 登入、看得到彼此、友誼賽，存檔改存在伺服器。</p></div><p class="ok"><b>驗收：</b>兩台電腦在同一張地圖看到對方，並打完一場友誼賽。</p></li>
+    <li><span class="m">M3</span><div><h4>成長系統</h4><p>升級學招、5 種進化、背包和商店、驛站存放箱。</p></div><p class="ok"><b>驗收：</b>一隻契靈從 Lv1 練到最終進化。</p></li>
+    <li><span class="m">M4</span><div><h4>世界與內容</h4><p>完整地圖、200 隻契靈、8 座道館、劇情和勁敵。</p></div><p class="ok"><b>驗收：</b>主線能從頭玩到打敗冠軍。</p></li>
+    <li><span class="m">M5</span><div><h4>契約賽與交換</h4><p>契約賽的完整規則、交換和交換進化、雙子祭壇。</p></div><p class="ok"><b>驗收：</b>契約賽的 7 條規則各有一個自動測試。</p></li>
+    <li><span class="m">M6</span><div><h4>打磨</h4><p>音樂音效、數值平衡、包成 exe。</p></div><p class="ok"><b>驗收：</b>兩個人實際玩完一輪，記下要調的地方。</p></li>
+  </ol>
+</section>
+
+<section id="decide">
+  <div class="sec-head">
+    <h2>需要你決定的事</h2>
+    <p class="lead">每一題我都先填了預設值。你沒意見，我就照預設做。</p>
+  </div>
+  <ol class="decide">
+    <li><b>契約賽輸掉的契靈能不能搶回來？</b><span class="def">預設：原主人可以發起一次「奪回戰」，對方可以拒絕。</span></li>
+    <li><b>美術從哪裡來？</b><span class="def">自己畫、買 16×16 素材包、或 AI 輔助再手修。200 隻契靈各要野外圖和戰鬥圖，這是整個專案最大的工作量。預設：M1 地圖先用現成素材包，契靈先用這頁的 16×16 小圖。</span></li>
+    <li><b>技術路線</b><span class="def">預設：瀏覽器版（Phaser + Node.js）。想要原生 exe 手感可以改 Godot 4。</span></li>
+    <li><b>名字</b><span class="def">「契靈物語」「晨曦地方」、人物和 200 隻契靈的名字都是暫定，隨時可以換。</span></li>
+    <li><b>等級上限 60 還是 100？</b><span class="def">預設：60，節奏比較快。</span></li>
+    <li><b>主機沒開的時候，另一個人能不能玩？</b><span class="def">預設：不行，一律連主機。改成可以的話，要做「本機存檔、連線時同步」，大約多一個階段的工作。</span></li>
+  </ol>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p>第一版構想，所有數值都會在實際玩過之後調整。契靈、地名和人物都是原創暫名；地圖是程式產生的示意圖；契靈是 16×16 的圖鑑小圖，戰鬥大圖之後再畫。</p>
+</div></footer>
+
+<dialog id="dexDlg" class="dexdlg" aria-label="契靈資料">
+  <div class="dlg"><button type="button" class="x" id="dexClose">關閉</button><div id="dexBody" style="display:grid;gap:16px"></div></div>
+</dialog>
+
+<script src="data.js"></script>
+<script src="sprites-a.js"></script>
+<script src="sprites-b.js"></script>
+<script src="sprites-c.js"></script>
+<script src="sprites-d.js"></script>
+<script src="sprites-e.js"></script>
+<script src="art.js"></script>
+<script src="app.js"></script>
+<script src="route.js"></script>
+</body>
+</html>
