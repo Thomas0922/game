@@ -1,11 +1,11 @@
 import { T } from '../tiles';
+import type { MapDef } from './types';
 
 /** 萌芽村：40×32 格。北邊出口通往 1 號道路 */
-export const SPROUT_W = 40;
-export const SPROUT_H = 32;
+const SPROUT_W = 40;
+const SPROUT_H = 32;
+/** 新遊戲的起點：主角家門口 */
 export const SPROUT_START = { x: 10, y: 22 };
-/** 北邊出口的兩格（地圖上方邊緣） */
-export const SPROUT_EXIT_X = [31, 32];
 
 const hash = (x: number, y: number) => {
   let h = Math.imul(x, 374761393) ^ Math.imul(y, 668265263);
@@ -29,7 +29,17 @@ function line(m: number[][], x0: number, y0: number, x1: number, y1: number, t: 
     for (let x = Math.min(x0, x1); x <= Math.max(x0, x1); x++) m[y][x] = t;
 }
 
-export function buildSproutVillage(): number[][] {
+export const SPROUT: MapDef = {
+  id: 'sprout',
+  name: '萌芽村',
+  w: SPROUT_W,
+  h: SPROUT_H,
+  grid: buildSproutVillage(),
+  // 北邊出口 x=31、32 對到 1 號道路底部 x=14、15
+  onExit: (x, y) => (y < 0 && (x === 31 || x === 32) ? { map: 'route1', x: x - 17, y: 95, facing: 'up' } : null),
+};
+
+function buildSproutVillage(): number[][] {
   const W = SPROUT_W, H = SPROUT_H;
   const m: number[][] = Array.from({ length: H }, (_, y) => Array.from({ length: W }, (_, x): number => {
     if (x < 2 || x >= W - 2 || y < 2 || y >= H - 2) return T.TREE;

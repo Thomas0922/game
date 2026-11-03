@@ -5,11 +5,20 @@ import Phaser from 'phaser';
 // 字母：b/a 主副色（自動上明暗）、l/d 主色亮暗、j/c 副色亮暗、v 光暈，其餘是固定色；外框由程式自動加
 export type SpriteDef = [mode: 'm' | 'f', main: string, accent: string, rows: string, size?: number];
 
-// 目前先放御三家，M1 再把其餘契靈搬過來
+// 目前只放 M1 會用到的契靈（和 species.ts 對應），其餘之後從設計頁搬過來
 export const SPRITES: Record<number, SpriteDef> = {
   1: ['m', '#d9a066', '#5cc24a', '...a.a./....a../..bbbbb/bbbbbbb/.bbbbbb/..bkbbb/..rbbss/...bssk/....bwb/....bbb/....dd.'],
   4: ['m', '#5b5361', '#ff6a3d', '....bbb/..bbbbb/.bbbbbb/.bbkbbb/.bbbbfa/sbbbbbb/ssbbbbb/.bbbbbb/..dd...'],
   7: ['f', '#5aa0e8', '#e8f4ff', '.......i..../......i.i.../.......i..../b...bbbbbb../bb.bbbbbbbb./.bbbbbbbbkbb/.bbbbbbbbbrb/..bssssssssb/...d.d..d.d.'],
+  10: ['m', '#b48a5a', '', '.....b./...bbbb/..bbbbb/..bkbbb/..bbbby/.bbbsss/bbbssss/.bbbsss/....y..'],
+  13: ['m', '#e0a35a', '', '.rb..../.bbbbbb/.bbkbbb/ssbbbbr/sssbsss/sssssss/.ssssss/..d..d.'],
+  15: ['f', '#a0be2c', '', '.....ggg..../...gggGggg../..ggbbbbbgg./.ggbkbbkbbg./.ggbbbrbbbg./..ggbbbbbgg./...ggggggg../....G...G...'],
+  18: ['f', '#e3b45c', '', '.b.b.......y./.bbbb.....y.y/bbkbb......y./kbbbbbbbbbyy./.ssbbbbbbbb../..sbbbbbbbb../..d.d...d.d..'],
+  98: ['m', '#e0443a', '', '...k.../....k../....kkk/...kwkk/..bbbbk/.bkbbbk/.bbbbbk/.bbbkbk/..bbbbk/...bbbk'],
+  101: ['m', '#f0c890', '', 'b....../bb...../bbbbbbb/.bkbbbb/.bbbbbr/..bbbbb/.ppbbbb/..bpppp/..bbbbb/..d..d.'],
+  103: ['m', '#a8845a', '', '...bbbb/..bbbbb/..bkbbb/..bbbbs/..bbbsk/..bbbbw/..bbbbb/nnnnnnn/.NNNNNN'],
+  149: ['m', '#f4f4f0', '', '.s...../.sbbbbb/kbbkbbb/.bbbbbb/..brrrr/..brkrr/..brrrr/.bbbkbb/bbkkbbb/bbbbbkb/.d..d..'],
+  151: ['f', '#f8f4ec', '', '..x.x.../..xxx.../.bbbbb../ybkbbb../.xbbbbb./..bbbbbb/..bbbbbb/...bbbb./...y.y..'],
 };
 
 const FIXED: Record<string, string> = {
@@ -27,7 +36,8 @@ function mix(hex: string, f: number): string {
 
 /** 把一張手繪圖轉成像素顏色表（null = 透明） */
 export function spritePixels(def: SpriteDef): (string | null)[][] {
-  const [mode, b, a, src, Z = 16] = def;
+  const [mode, b, a0, src, Z = 16] = def;
+  const a = a0 || mix(b, .4);
   let rows = src.split('/');
   if (mode === 'm') {
     const hw = Math.max(...rows.map(r => r.length));

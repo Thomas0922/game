@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { TitleScene } from './scenes/TitleScene';
-import { TownScene } from './scenes/TownScene';
+import { WorldScene } from './scenes/WorldScene';
 
 // 原生解析度 480×270（16×16 地圖格 → 30×17 格一個畫面），整數放大到視窗大小
 new Phaser.Game({
@@ -15,5 +15,5 @@ new Phaser.Game({
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [TitleScene, TownScene],
+  scene: [TitleScene, WorldScene],
 });

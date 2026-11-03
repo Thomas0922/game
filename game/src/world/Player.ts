@@ -37,7 +37,7 @@ export class Player {
    * 往 dir 走一格。blocked 判斷目的地能不能走；走不過去時只轉向。
    * 回傳是否真的開始移動。
    */
-  step(dir: Dir, run: boolean, blocked: (x: number, y: number) => boolean): boolean {
+  step(dir: Dir, run: boolean, blocked: (x: number, y: number) => boolean, onArrive?: () => void): boolean {
     if (this.moving) return false;
     this.face(dir);
     const [dx, dy] = DIR_DELTA[dir];
@@ -49,10 +49,26 @@ export class Player {
     const ms = run ? RUN_MS : WALK_MS;
     this.sprite.setFrame(BASE_FRAME[dir] + (this.stepFoot ? 1 : 2));
     this.scene.time.delayedCall(ms / 2, () => this.sprite.setFrame(BASE_FRAME[dir]));
+    return this.moveTo(nx, ny, ms, onArrive);
+  }
+
+  /** 從小崖往 dir 跳兩格（中間那格是崖邊），跳的時候會往上彈一下 */
+  hop(dir: Dir, onLand?: () => void) {
+    if (this.moving) return;
+    this.face(dir);
+    const [dx, dy] = DIR_DELTA[dir];
+    this.moving = true;
+    this.scene.tweens.add({ targets: this.sprite, y: this.sprite.y - 6, duration: 150, yoyo: true, ease: 'Quad.easeOut' });
+    this.moveTo(this.tx + dx * 2, this.ty + dy * 2, 300, onLand);
+  }
+
+  private moveTo(nx: number, ny: number, ms: number, onArrive?: () => void): boolean {
+    this.moving = true;
     this.scene.tweens.add({
-      targets: this.sprite, x: nx * TILE, y: ny * TILE, duration: ms,
-      onComplete: () => { this.tx = nx; this.ty = ny; this.moving = false; },
+      targets: this.sprite, x: nx * TILE, duration: ms,
     });
+    if (ny !== this.ty) this.scene.tweens.add({ targets: this.sprite, y: ny * TILE, duration: ms });
+    this.scene.time.delayedCall(ms, () => { this.tx = nx; this.ty = ny; this.moving = false; onArrive?.(); });
     return true;
   }
 }

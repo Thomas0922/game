@@ -7,14 +7,14 @@ export const TILE = 16;
 export const T = {
   GRASS: 0, GRASS2: 1, FLOWER: 2, PATH: 3, TREE: 4, WATER: 5, FENCE: 6,
   ROOF_R: 7, EAVE_R: 8, ROOF_B: 9, EAVE_B: 10, ROOF_L: 11, EAVE_L: 12,
-  WALL: 13, WINDOW: 14, DOOR: 15, SIGN: 16, TALL: 17,
+  WALL: 13, WINDOW: 14, DOOR: 15, SIGN: 16, TALL: 17, LEDGE: 18,
 } as const;
-const COUNT = 18;
+const COUNT = 19;
 
-/** 走不過去的圖塊。門目前也擋住，等有室內地圖再打開 */
+/** 走不過去的圖塊。門目前也擋住，等有室內地圖再打開；小崖只能往右跳下（由場景處理） */
 export const SOLID = new Set<number>([
   T.TREE, T.WATER, T.FENCE, T.ROOF_R, T.EAVE_R, T.ROOF_B, T.EAVE_B, T.ROOF_L, T.EAVE_L,
-  T.WALL, T.WINDOW, T.DOOR, T.SIGN,
+  T.WALL, T.WINDOW, T.DOOR, T.SIGN, T.LEDGE,
 ]);
 
 type Ctx = CanvasRenderingContext2D;
@@ -114,6 +114,13 @@ DRAW[T.TALL] = (g, o) => {
   [[1, 2], [6, 1], [11, 3], [3, 8], [9, 7], [14, 9], [1, 13], [7, 12], [12, 14]].forEach(([x, y]) => {
     rect(g, o + x, y, 1, 1, '#8bd66b'); rect(g, o + x, y + 1, 1, 2, '#2e7a34'); rect(g, o + x + 1, y + 2, 1, 1, '#2e7a34');
   });
+};
+
+DRAW[T.LEDGE] = (g, o) => {
+  grass(g, o);
+  rect(g, o + 11, 0, 3, 16, '#9a6236');
+  rect(g, o + 14, 0, 2, 16, '#5e3a20');
+  rect(g, o + 10, 0, 1, 16, '#5fae4a');
 };
 
 /** 把所有圖塊畫進一張貼圖，回傳貼圖 key */
